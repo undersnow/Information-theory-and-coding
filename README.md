@@ -22,9 +22,10 @@ This is a term project for course IS205 Information theory and coding in SJTU.
 ### 类
 
 - 按bit读取文件：class readBitFile
-
 - 哈夫曼树：class hufTree
 
 ### 码表
 
 一维数组 codeTable[256], [ ]内为byte转换成对应的十进制数字，返回编码的符号
+
+一维数组 proByte[256], [ ]内为byte转换成对应的十进制数字, 返回信源符号的概率
