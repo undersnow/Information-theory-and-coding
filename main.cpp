@@ -6,6 +6,7 @@
 #include "hufTree.h"
 #include "fileIO.h"
 #define N 256 // the number of source symbol
+using namespace std;
 void compress(std::string file, std::string outDir = "output");
 void extract(std::string file, std::string outDir = "output");
 
@@ -52,6 +53,12 @@ void compress(std::string file, std::string outDir){
     hufTree t(proByte, N);
     t.traverse(codeTable, N);
     
+	fstream out_file;
+	out_file.open(outfile,ios::out);
+	for (int i=0;i<N;i++)
+	file<<codeTable[N];
+	out_file.close();
+	
     while (fin.readByte(byte)) {
         fout.writeCode(codeTable[byte]);
     }

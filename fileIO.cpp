@@ -45,11 +45,32 @@ int fileIO::byteNum()const{
 }
 
 bool fileIO::readByte(uint8_t & byte) const{
-    
+    if (mode == READ)
+	{
+		fstream a;
+	    a.open(file,ios::binary|ios::in);
+		if(!a)
+			return false;
+		a.seekg(byteCount,ios::beg);
+		a.read((char*)&byte,1);
+		byteCount+=1;
+		a.close();
+		return true;
+	}
+	return false;
 }
 
 void fileIO::writeByte(const uint8_t byte){
-    
+    if (mode == WRITE)
+	{
+		fstream b;
+		b.open(file,ios::out|ios::ate);
+		if(!b)
+			cout<<"wrong";
+		b.write((char*)&byte,1);
+		b.close();
+	}
+	cout<<"wrong";
 }
 
 uint8_t fileIO::readBit(){
@@ -87,6 +108,15 @@ bool fileIO::writeCode(const std::string code){
 }
 
 bool fileIO::getCodeTable(std::string * codeTable, int num){
-
+fstream out_file;
+	 out_file.open(file,ios::in);
+	 if(!out_file)
+		 return false;
+	 for(int i=0;i<num;i++)
+	 {
+		 file>>*(codeTable+i);
+	 }
+	 out_file.close();
+	 return true;
 }
 
